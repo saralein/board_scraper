@@ -1,6 +1,10 @@
+require_relative './board_scraper.rb'
+
 class BoardSelector
-  def initialize(crafters, requested_number)
-    @crafters = crafters
+  attr_accessor :crafters
+
+  def initialize(url, selector, requested_number)
+    @crafters = BoardScraper.new(url, selector).get_crafters
     @requested_number = requested_number
   end
 
@@ -8,7 +12,7 @@ class BoardSelector
     random_numbers = Hash.new(0)
 
     while (random_numbers.length != @requested_number)
-      number = 1 + rand(6)
+      number = rand(@crafters.length)
       if (!random_numbers.key?(number))
         random_numbers[number] = number
       end
@@ -18,15 +22,20 @@ class BoardSelector
   end
 
   def crafters_list_is_long_enough
-    if (@crafters.length < @requested_number)
-      # throw Error.new('Crafter list is too short.')
-      raise 'Crafter list is too short.'
-    else
-      return true
-    end
+    return @crafters.length >= @requested_number
   end
 
   def select_crafters
-    return []
+    if (crafters_list_is_long_enough)
+      numbers = generate_random_numbers
+      return numbers.map{ |number| @crafters[number]}
+    else
+      raise 'Crafter list is too short.'
+      return @crafters
+    end
+  end
+
+  def display_crafters
+    select_crafters.each{ |crafter| puts crafter }
   end
 end
