@@ -48,7 +48,8 @@ describe BoardSelector do
       expect(@selector.select_crafters).to eql(['Peter', 'Bill', 'Nancy'])
     end
 
-    it 'return original crafters list if list is too short' do
+    it 'returns original crafters list if list is too short' do
+      expect(STDOUT).to receive(:puts).with("Crafter list is too short (2 members):")
       expect(@short_selector.select_crafters).to eql(short_crafters)
     end
   end

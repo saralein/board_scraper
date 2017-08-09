@@ -28,7 +28,7 @@ class BoardSelector
       numbers = generate_random_numbers
       return numbers.map{ |number| @crafters[number] }
     else
-      raise 'Crafter list is too short.'
+      puts "Crafter list is too short (#{@crafters.length} members):"
       return @crafters
     end
   end
