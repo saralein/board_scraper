@@ -1,6 +1,11 @@
 # Review Board Selector
 
-Run app with `ruby app.rb`.
+Run app with `ruby app.rb`. Test app with `bundle exec rspec`.
+
+## Classes
+
+* `BoardScraper` created to retrieve and parse crafter information from website.
+* `BoardSelector` created to generate random numbers, pull crafters based on number list, and display names.
 
 ## Backlog
 
