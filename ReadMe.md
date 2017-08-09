@@ -6,6 +6,7 @@ Run app with `ruby app.rb`. Test app with `bundle exec rspec`.
 
 * `BoardScraper` created to retrieve and parse crafter information from website.
 * `BoardSelector` created to generate random numbers, pull crafters based on number list, and display names.
+* `Search` created to hold search criteria.
 
 ## Backlog
 
