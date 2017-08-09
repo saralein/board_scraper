@@ -1,15 +1,15 @@
 require 'HTTParty'
 require 'Nokogiri'
+require_relative './search.rb'
 
 class BoardScraper
-  def initialize(url, css_selector)
-    @url = url
-    @css_selector = css_selector
+  def initialize
+    @search = Search.new
   end
 
-  def parse_html()
+  def parse_html
     begin
-      doc = HTTParty.get(@url)
+      doc = HTTParty.get(@search.url)
     rescue HTTParty::Error => error
       puts error.inspect
     rescue => error
@@ -19,10 +19,10 @@ class BoardScraper
     end
   end
 
-  def get_crafters()
-    team_members = parse_html.css(@css_selector)
+  def get_crafters
+    team_members = parse_html.css(@search.css_selector)
     return team_members.children
-      .select{ |member| member.css('.team_member-title').text.downcase.include? 'software' }
-      .map{ |member| member.css('.team_member-name').text }
+      .select{ |member| member.css(@search.css_to_filter).text.downcase.include? @search.filter_by_phrase }
+      .map{ |member| member.css(@search.css_to_map).text }
   end
 end

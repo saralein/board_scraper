@@ -1,9 +1,7 @@
 require_relative '../lib/board_scraper.rb'
 
 describe BoardScraper do
-  url = 'https://8thlight.com/team/'
-  css_selector = '.team_gallery'
-  scraper = BoardScraper.new(url, css_selector)
+  scraper = BoardScraper.new
   response = '<div class="content team_gallery">
               <div class="team_member">
               <img class="team_member-photo" src="/images/team/aaron-lahey-4390ac4a.jpg" alt="Aaron Lahey, Software Crafter | 8th Light"><h3 class="team_member-name">Aaron Lahey</h3>

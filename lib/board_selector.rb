@@ -1,10 +1,8 @@
 require_relative './board_scraper.rb'
 
 class BoardSelector
-  attr_accessor :crafters
-
-  def initialize(url, selector, requested_number)
-    @crafters = BoardScraper.new(url, selector).get_crafters
+  def initialize(requested_number)
+    @crafters = BoardScraper.new.get_crafters
     @requested_number = requested_number
   end
 
@@ -28,7 +26,7 @@ class BoardSelector
   def select_crafters
     if (crafters_list_is_long_enough)
       numbers = generate_random_numbers
-      return numbers.map{ |number| @crafters[number]}
+      return numbers.map{ |number| @crafters[number] }
     else
       raise 'Crafter list is too short.'
       return @crafters
