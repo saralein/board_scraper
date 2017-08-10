@@ -1,22 +1,20 @@
 require_relative './board_scraper.rb'
 
 class BoardSelector
-  def initialize(requested_number)
-    @crafters = BoardScraper.new.get_crafters
+  def initialize(requested_number, crafter_list)
+    @crafters = crafter_list
     @requested_number = requested_number
   end
 
   def generate_random_numbers
-    random_numbers = Hash.new(0)
+    random_numbers = Set.new []
 
     while (random_numbers.length != @requested_number)
       number = rand(@crafters.length)
-      if (!random_numbers.key?(number))
-        random_numbers[number] = number
-      end
+      random_numbers.add(number)
     end
 
-    return random_numbers.keys
+    return random_numbers.to_a
   end
 
   def crafters_list_is_long_enough
