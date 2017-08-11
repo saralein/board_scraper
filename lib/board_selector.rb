@@ -1,8 +1,6 @@
 require_relative './board_scraper.rb'
 
 class BoardSelector
-  attr_accessor :crafters
-
   def initialize(requested_number, crafter_list)
     @crafters = crafter_list
     @requested_number = requested_number
