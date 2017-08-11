@@ -1,6 +1,8 @@
 require_relative './board_scraper.rb'
 
 class BoardSelector
+  attr_accessor :crafters
+
   def initialize(requested_number, crafter_list)
     @crafters = crafter_list
     @requested_number = requested_number
@@ -26,12 +28,7 @@ class BoardSelector
       numbers = generate_random_numbers
       return numbers.map{ |number| @crafters[number] }
     else
-      puts "Crafter list is too short (#{@crafters.length} members)."
-      return []
+      raise "Crafter list is too short (#{@crafters.length} members)."
     end
-  end
-
-  def display_crafters
-    select_crafters.each{ |crafter| puts crafter }
   end
 end

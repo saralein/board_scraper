@@ -12,9 +12,14 @@ def pick_review_board
     retry
   end
 
-  BoardSelector
-    .new(number_of_crafters, BoardScraper.new.get_crafters)
-    .display_crafters
+  selector = BoardSelector.new(number_of_crafters, BoardScraper.new.get_crafters)
+
+  begin
+    board = selector.select_crafters
+    board.each{ |crafter| puts crafter }
+  rescue => error
+    puts error
+  end
 end
 
 pick_review_board
